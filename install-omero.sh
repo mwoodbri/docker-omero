@@ -11,12 +11,12 @@ useradd -m omero
 mkdir /OMERO && chown omero /OMERO
 
 apt-get install -y wget unzip
-su - omero -c "wget http://cvs.openmicroscopy.org.uk/snapshots/omero/5.0.0-beta1/OMERO.server-5.0.0-beta1-ice34-b3470.zip -P /tmp/"
-su - omero -c "unzip /tmp/OMERO.server-5.0.0-beta1-ice34-b3470.zip -d /home/omero/"
-su - omero -c "rm /tmp/OMERO.server-5.0.0-beta1-ice34-b3470.zip"
-su - omero -c "ln -s /home/omero/OMERO.server-5.0.0-beta1-ice34-b3470 /home/omero/OMERO.server"
+su - omero -c "wget http://cvs.openmicroscopy.org.uk/snapshots/omero/4.4.8p1/OMERO.server-4.4.8p1-ice34-b304.zip -P /tmp/"
+su - omero -c "unzip /tmp/OMERO.server-4.4.8p1-ice34-b304.zip -d /home/omero/"
+su - omero -c "rm /tmp/OMERO.server-4.4.8p1-ice34-b304.zip"
+su - omero -c "ln -s /home/omero/OMERO.server-4.4.8p1-ice34-b304 /home/omero/OMERO.server"
 
 apt-get install -y zeroc-ice34 openjdk-7-jre-headless
 update-alternatives --set java /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
 
-su - omero -c "/home/omero/OMERO.server/bin/omero db script -f - OMERO5.0DEV 6 ${ROOT_PASS-omero}" | PGPASSWORD=${DB_PASS-omero} psql -h ${DB_HOST-localhost} -U ${DB_USER-omero} ${DB_NAME-omero}
+su - omero -c "/home/omero/OMERO.server/bin/omero db script -f - OMERO4.4 0 ${ROOT_PASS-omero}" | PGPASSWORD=${DB_PASS-omero} psql -h ${DB_HOST-localhost} -U ${DB_USER-omero} ${DB_NAME-omero}
